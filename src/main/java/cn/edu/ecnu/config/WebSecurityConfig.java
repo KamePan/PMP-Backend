@@ -77,12 +77,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /*这玩意暂时不知道是干嘛的*/
-    @Bean
+    /*@Bean
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",
                 new CorsConfiguration().applyPermitDefaultValues());
         return source;
     }
-
+    */
 }

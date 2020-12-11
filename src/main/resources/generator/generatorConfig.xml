@@ -58,12 +58,5 @@
         <table tableName="team"></table>
         <table tableName="team_student"></table>
         <table tableName="attachment"></table>
-<!--        <table tableName=""-->
-<!--               enableCountByExample="false"-->
-<!--               enableUpdateByExample="false"-->
-<!--               enableDeleteByExample="false"-->
-<!--               enableSelectByExample="false"-->
-<!--               selectByExampleQueryId="false">-->
-<!--        </table>-->
     </context>
 </generatorConfiguration>

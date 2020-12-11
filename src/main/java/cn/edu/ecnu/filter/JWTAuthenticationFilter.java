@@ -42,8 +42,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             // ObjectMapper 类是 Jacksion 库的主要类
             // 能够使 Java 对象转化为 Json 对象，或 Json 对象转化为 java 对象
             // 此处为 json 对象转化为 User 类
-
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            // 使用登录信息生成 UsernamePasswordAuthenticationToken, 每次登录都会生成一个用于验证的 token
+            // 这个 token 与 jwt 生成的 token 不同
             return authenticationManager.authenticate(
                     /**
                      * @param principal 用户名
@@ -74,14 +75,17 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
 
-        // 博客上写 getPrinciple() 返回实现了 UserDetails 接口的对象，我再看看
+        // getPrinciple() 返回实现了 UserDetails 接口的对象
         JwtUser jwtUser = (JwtUser) authResult.getPrincipal();
         System.out.println("jwtUser:" + jwtUser.toString());
         String role = "";
-        // 这里实际上可以存储多个角色
+        // 实际上可以存储多个角色，但这里只处理一个
         for (GrantedAuthority authority : jwtUser.getAuthorities()) {
             role = authority.getAuthority();
         }
+        // 疑问：创建了 token 不需要存储吗
+        // 回答：Jwt的机制就是请求携带的 token 解析出来属于谁，那么这个请求就是谁发出的，不会有其他的验证
+        // 使用 redis 存储 jwt 是为了管理 jwt 的有效期
         String token = JwtUtil.createJwt(jwtUser.getUsername(), role);
         // 返回成功 token
         response.setHeader("token", JwtUtil.tokenPrefix + token);
