@@ -24,7 +24,9 @@ public class Teacher implements Serializable {
 
     private String description;
 
-    private List<Project> projects;
+    private List<Project> projectsToJudge;
+
+    private List<Project> projectsToInstruct;
 
     private static final long serialVersionUID = 1L;
 
