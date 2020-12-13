@@ -34,6 +34,11 @@
       <result column="iadvisorid" property="advisorid" jdbcType="VARCHAR" />
       <result column="iteamid" property="teamid" jdbcType="VARCHAR" />
     </collection>
+    <collection property="messages" ofType="cn.edu.ecnu.domain.Message">
+      <id column="mid" property="mid" />
+      <result column="content" property="content" />
+      <result column="tid" property="uid"/>
+    </collection>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
@@ -106,7 +111,8 @@
     jp.pid AS jpid, jp.pid AS jprojectname, jp.description AS jpdescription, jp.type AS jtype, jp.stage AS jstage,
     jp.midmark AS jmidmark, jp.finalmark AS jfinalmark, jp.advisorid AS jadvisorid, jp.teamid AS jteamid,
     ip.pid AS ipid, ip.pid AS iprojectname, ip.description AS ipdescription, ip.type AS itype, ip.stage AS istage,
-    ip.midmark AS imidmark, ip.finalmark AS ifinalmark, ip.advisorid AS iadvisorid, ip.teamid AS iteamid
+    ip.midmark AS imidmark, ip.finalmark AS ifinalmark, ip.advisorid AS iadvisorid, ip.teamid AS iteamid,
+    mid, content
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.ecnu.domain.TeacherExample" >
     <!--
@@ -119,9 +125,10 @@
     </if>
     <include refid="Base_Column_List" />
     from
-    ((teacher left outer join project as ip on ip.advisorid = tid)
+    (((teacher left outer join project as ip on ip.advisorid = tid)
     left outer join judge_teacher_project as tp on tp.tid = teacher.tid)
-    left outer join project as jp on jp.pid = tp.pid
+    left outer join project as jp on jp.pid = tp.pid)
+    left outer join message as m on m.uid = teacher.tid
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -137,9 +144,10 @@
     select 
     <include refid="Base_Column_List" />
     from
-    ((teacher left outer join project as ip on ip.advisorid = tid)
+    (((teacher left outer join project as ip on ip.advisorid = tid)
     left outer join judge_teacher_project as tp on tp.tid = teacher.tid)
-    left outer join project as jp on jp.pid = tp.pid
+    left outer join project as jp on jp.pid = tp.pid)
+    left outer join message as m on m.uid = teacher.tid
     where teacher.tid = #{tid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

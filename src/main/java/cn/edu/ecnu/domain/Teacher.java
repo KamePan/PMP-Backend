@@ -28,6 +28,8 @@ public class Teacher implements Serializable {
 
     private List<Project> projectsToInstruct;
 
+    private List<Message> messages;
+
     private static final long serialVersionUID = 1L;
 
 }
