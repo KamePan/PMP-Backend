@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.swing.plaf.IconUIResource;
 import java.io.FileNotFoundException;
 
-@Api("文件处理接口类")
+@Api(tags = "文件处理控制器")
 @RestController
 @RequestMapping("/attach")
 public class AttachController {

@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api("学生信息控制器")
+@Api(tags = "学生信息控制器")
 @RestController
 @RequestMapping("/student")
 public class SudentController {

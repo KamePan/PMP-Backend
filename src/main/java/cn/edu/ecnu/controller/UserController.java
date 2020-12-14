@@ -4,17 +4,14 @@ import cn.edu.ecnu.domain.User;
 import cn.edu.ecnu.service.UserService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.SerializableString;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-@Api(value = "用户类")
+@Api(tags = "用户信息控制器")
 @RestController
 @RequestMapping("/user")
 public class UserController {

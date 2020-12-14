@@ -16,4 +16,8 @@ public class ProjectService {
         return project;
     }
 
+    public void insertProject(Project project) {
+        projectMapper.insertSelective(project);
+    }
+
 }

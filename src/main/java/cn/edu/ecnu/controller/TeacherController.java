@@ -8,7 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api("教师信息存储")
+@Api(tags = "教师信息控制器")
 @RequestMapping("/teacher")
 @RestController
 public class TeacherController {
@@ -25,4 +25,6 @@ public class TeacherController {
         object.put("teacher", teacher);
         return object;
     }
+
+
 }

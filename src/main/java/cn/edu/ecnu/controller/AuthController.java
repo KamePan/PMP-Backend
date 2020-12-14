@@ -2,6 +2,7 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.User;
 import cn.edu.ecnu.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "用户验证与鉴权控制器")
 @RequestMapping("/auth")
 public class AuthController {
 

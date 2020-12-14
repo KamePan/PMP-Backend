@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@Api("项目信息控制器")
+import java.util.UUID;
+
+@Api(tags = "项目信息控制器")
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
@@ -26,4 +28,15 @@ public class ProjectController {
         return object;
     }
 
+    @ApiOperation("创建新项目")
+    @PostMapping
+    @ResponseBody
+    public JSONObject createProject(@RequestBody Project project) {
+        JSONObject object = new JSONObject();
+        String pid = "P" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        project.setPid(pid);
+        projectService.insertProject(project);
+        object.put("project", project);
+        return object;
+    }
 }
