@@ -85,10 +85,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
         // 疑问：创建了 token 不需要存储吗
         // 回答：Jwt的机制就是请求携带的 token 解析出来属于谁，那么这个请求就是谁发出的，不会有其他的验证
-        // 使用 redis 存储 jwt 是为了管理 jwt 的有效期
+        // 使用 redis 存储 token 是为了管理 token 的有效期，jwt 可以设置 token 的有效时间，因此不需要使用 redis
         String token = JwtUtil.createJwt(jwtUser.getUsername(), role);
         // 返回成功 token
         response.setHeader("token", JwtUtil.tokenPrefix + token);
+        response.setHeader("role", role);
     }
 
     /*验证失败后调用方法*/

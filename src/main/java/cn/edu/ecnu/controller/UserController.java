@@ -2,14 +2,15 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.User;
 import cn.edu.ecnu.service.UserService;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @Api(tags = "用户信息控制器")
 @RestController
@@ -17,11 +18,14 @@ import java.util.List;
 public class UserController {
 
     @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     public UserService userService;
 
-    @ApiOperation(value = "查找所有用户", notes = "可以查找到所有用户")
+    @ApiOperation(value = "查找所有用户")
     @ResponseBody
-    @RequestMapping("/findUsers")
+    @GetMapping
     public JSONObject findAllUsers() {
         List<User> users = userService.getAllUsers();
         JSONObject object = new JSONObject();
@@ -29,17 +33,18 @@ public class UserController {
         return object;
     }
 
+    @ApiOperation("创建权限为 ROLE_TEACHER 的用户")
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public JSONObject findUserById(@RequestBody User user) {
+    @PostMapping
+    public JSONObject createUserForTeacher(@RequestBody User user) {
         JSONObject object = new JSONObject();
-        User user1 = userService.findUserByUsername(user);
+        user.setUid("U" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+        user.setRole("ROLE_TEACHER");
+        userService.insertUserForTeacher(user);
+        object.put("user", user);
         return object;
     }
 
-    @GetMapping("/getMessage")
-    public String getMessage(){
-        return "你已通过验证";
-    }
+
 
 }
