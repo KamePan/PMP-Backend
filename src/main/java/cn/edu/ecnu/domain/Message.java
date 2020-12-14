@@ -1,5 +1,6 @@
 package cn.edu.ecnu.domain;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 import java.io.Serializable;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ApiModel(description = "")
 public class Message implements Serializable {
 
     private String mid;

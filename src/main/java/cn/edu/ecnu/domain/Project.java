@@ -1,5 +1,6 @@
 package cn.edu.ecnu.domain;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ApiModel(description = "")
 public class Project implements Serializable {
 
     private String pid;
