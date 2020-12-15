@@ -1,6 +1,8 @@
 package cn.edu.ecnu.domain;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class MessageExample {
@@ -192,6 +194,32 @@ public class MessageExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andMidIsNull() {
@@ -401,6 +429,66 @@ public class MessageExample {
 
         public Criteria andUidNotBetween(String value1, String value2) {
             addCriterion("uid not between", value1, value2, "uid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeIsNull() {
+            addCriterion("messagetime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeIsNotNull() {
+            addCriterion("messagetime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeEqualTo(Date value) {
+            addCriterionForJDBCDate("messagetime =", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("messagetime <>", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("messagetime >", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("messagetime >=", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeLessThan(Date value) {
+            addCriterionForJDBCDate("messagetime <", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("messagetime <=", value, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeIn(List<Date> values) {
+            addCriterionForJDBCDate("messagetime in", values, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("messagetime not in", values, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("messagetime between", value1, value2, "messagetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andMessagetimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("messagetime not between", value1, value2, "messagetime");
             return (Criteria) this;
         }
     }

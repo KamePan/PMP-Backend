@@ -8,6 +8,7 @@ import cn.edu.ecnu.domain.Teacher;
 import cn.edu.ecnu.domain.User;
 import cn.edu.ecnu.domain.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,9 +22,13 @@ public class UserService {
     @Autowired
     private TeacherMapper teacherMapper;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     public List<User> getAllUsers() {
+        List<User> users = null;
         UserExample example = new UserExample();
-        List<User> users = userMapper.selectByExample(example);
+        users = userMapper.selectByExample(example);
         return users;
     }
 

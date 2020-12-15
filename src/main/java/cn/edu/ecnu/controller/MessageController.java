@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,7 @@ public class MessageController {
         for (Message message : messages) {
             String mid = "M" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
             message.setMid(mid);
+            message.setMessagetime(new Date());
             messageService.insertMessage(message);
         }
         object.put("messages", messages);

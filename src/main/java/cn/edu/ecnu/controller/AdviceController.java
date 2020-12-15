@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Api(tags = "建议信息控制器")
@@ -25,6 +26,7 @@ public class AdviceController {
         JSONObject object = new JSONObject();
         String aid = "A" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         advice.setAid(aid);
+        advice.setAdvicetime(new Date());
         adviceService.insertAdvice(advice);
         object.put("advice", advice);
         return object;
