@@ -16,13 +16,23 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    @ApiOperation("根据tid查找教师信息")
+    @ApiOperation("根据 tid 查找教师信息")
     @GetMapping("/{tid}")
     @ResponseBody
     public JSONObject findTeacherById(@PathVariable String tid) {
         JSONObject object = new JSONObject();
         Teacher teacher = teacherService.findTeacherById(tid);
         object.put("teacher", teacher);
+        return object;
+    }
+
+    @ApiOperation("根据 tid 修改教师信息")
+    @PutMapping
+    @ResponseBody
+    public JSONObject UpdateTeacherById(@RequestBody Teacher teacher) {
+        JSONObject object = new JSONObject();
+        Teacher newTeacher = teacherService.updateTeacherSelective(teacher);
+        object.put("teacher", newTeacher);
         return object;
     }
 

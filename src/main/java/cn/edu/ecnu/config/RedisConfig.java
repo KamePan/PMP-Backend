@@ -65,8 +65,8 @@ public class RedisConfig {
             @Override
             public Object generate(Object target, Method method, Object... objects) {
                 StringBuilder builder = new StringBuilder();
-                builder.append(target.getClass().getName());
-                builder.append(method.getName());
+                builder.append("class " + target.getClass().getName());
+                //builder.append(method.getName());
                 for (Object object : objects) {
                     builder.append(object.toString());
                 }
@@ -89,7 +89,7 @@ public class RedisConfig {
         jackson2JsonRedisSerializer.setObjectMapper(om);
 
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(1)) // 设置缓存有效期一分钟，考虑到修改后可能需要马上查询，缓存时间不能设得过长
+                .entryTtl(Duration.ofHours(1)) // 设置缓存有效期为 1 小时
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
                 .disableCachingNullValues();
