@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Message;
+import cn.edu.ecnu.netty.ChannelPool;
 import cn.edu.ecnu.service.MessageService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -30,6 +31,7 @@ public class MessageController {
             message.setMid(mid);
             message.setMessagetime(new Date());
             messageService.insertMessage(message);
+            ChannelPool.pointSending(message.getUid(), message.getContent());
         }
         object.put("messages", messages);
         return object;
