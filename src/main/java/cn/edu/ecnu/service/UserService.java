@@ -8,11 +8,13 @@ import cn.edu.ecnu.domain.Teacher;
 import cn.edu.ecnu.domain.User;
 import cn.edu.ecnu.domain.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@CacheConfig(cacheNames = "User", keyGenerator = "keyGenerator")
 @Service
 public class UserService {
 
@@ -23,8 +25,9 @@ public class UserService {
     private TeacherMapper teacherMapper;
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private StudentMapper studentMapper;
 
+    @Cacheable
     public List<User> getAllUsers() {
         List<User> users = null;
         UserExample example = new UserExample();
@@ -32,11 +35,10 @@ public class UserService {
         return users;
     }
 
-    public User findUserByUsername(User user) {
-        return null;
-    }
-
     public User registerUser(User user) {
+        Student student = new Student();
+        student.setSid(user.getUid());
+        studentMapper.insertSelective(student);
         userMapper.insertSelective(user);
         return user;
     }

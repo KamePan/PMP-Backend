@@ -3,9 +3,7 @@ package cn.edu.ecnu.service;
 import cn.edu.ecnu.dao.AdviceMapper;
 import cn.edu.ecnu.domain.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class AdviceService {

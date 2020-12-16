@@ -14,14 +14,12 @@ import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-
-
 
 @Configuration
 @EnableCaching //开启缓存
@@ -77,10 +75,25 @@ public class RedisConfig {
         };
     }
 
+    /*由于没有使用 redisTemplate 进行初始化，因此用不上之前配置的序列化方法，如果不重写则会在 redis中乱码*/
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
+
+        RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+
+        //解决查询缓存转换异常的问题
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(1)); // 设置缓存有效期一分钟，考虑到修改后可能需要马上查询，缓存时间不能设得过长
+                .entryTtl(Duration.ofMinutes(1)) // 设置缓存有效期一分钟，考虑到修改后可能需要马上查询，缓存时间不能设得过长
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .disableCachingNullValues();
+
         return RedisCacheManager
                 .builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
                 .cacheDefaults(redisCacheConfiguration).build();
