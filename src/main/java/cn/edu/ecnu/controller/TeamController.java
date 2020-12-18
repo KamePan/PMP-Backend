@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Team;
+import cn.edu.ecnu.domain.TeamStudent;
 import cn.edu.ecnu.service.TeamService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -18,12 +19,12 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @ApiOperation("通过tid查询队伍")
+    @ApiOperation("通过teamid查询队伍")
     @ResponseBody
-    @GetMapping("/{tid}")
-    public JSONObject findTeamById(@PathVariable String tid) {
+    @GetMapping("/{teamid}")
+    public JSONObject findTeamById(@PathVariable String teamid) {
         JSONObject object = new JSONObject();
-        Team team = teamService.findTeamById(tid);
+        Team team = teamService.findTeamById(teamid);
         object.put("team", team);
         return object;
     }
@@ -37,6 +38,16 @@ public class TeamController {
         team.setTeamid(teamid);
         teamService.insertTeam(team, uid);
         object.put("team", team);
+        return object;
+    }
+
+    @ApiOperation("根据 username 邀请成员加入项目")
+    @PostMapping("/invite")
+    @ResponseBody
+    public JSONObject InviteMember(@RequestBody TeamStudent teamStudent) {
+        JSONObject object = new JSONObject();
+        teamService.inviteMember(teamStudent);
+        object.put("invite", teamStudent);
         return object;
     }
 }

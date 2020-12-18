@@ -1,8 +1,6 @@
 package cn.edu.ecnu.controller;
 
-import cn.edu.ecnu.domain.Attachment;
 import cn.edu.ecnu.service.AttachService;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.plaf.IconUIResource;
 import java.io.FileNotFoundException;
 
 @Api(tags = "文件处理控制器")

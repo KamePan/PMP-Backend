@@ -2,16 +2,12 @@ package cn.edu.ecnu.service;
 
 import cn.edu.ecnu.dao.TeamMapper;
 import cn.edu.ecnu.dao.TeamStudentMapper;
-import cn.edu.ecnu.domain.Project;
 import cn.edu.ecnu.domain.Team;
 import cn.edu.ecnu.domain.TeamStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.concurrent.TimeUnit;
 
 // @CacheConfig：该注解是用来开启声明的类参与缓存,如果方法内的@Cacheable注解没有添加key值，
 //              那么会自动使用cahceNames配置参数并且追加方法名。
@@ -49,5 +45,9 @@ public class TeamService {
         TeamStudent teamStudent = new TeamStudent(team.getTeamid(), uid);
         teamStudentMapper.insert(teamStudent);
         teamMapper.insert(team);
+    }
+
+    public void inviteMember(TeamStudent teamStudent) {
+        teamStudentMapper.insert(teamStudent);
     }
 }

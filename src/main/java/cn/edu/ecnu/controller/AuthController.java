@@ -31,7 +31,7 @@ public class AuthController {
         user.setUid("U" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
         user.setUsername(registerUser.get("username"));
         user.setPassword(bCryptPasswordEncoder.encode(registerUser.get("password")));
-        user.setRole("ROLE_USER");
+        user.setRole("ROLE_STUDENT");
         User savedUser = userService.registerUser(user);
         System.out.println(savedUser.toString());
         return savedUser.toString();

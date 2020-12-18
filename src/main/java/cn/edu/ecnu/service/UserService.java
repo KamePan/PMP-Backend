@@ -1,12 +1,10 @@
 package cn.edu.ecnu.service;
 
+import cn.edu.ecnu.dao.JudgeTeacherProjectMapper;
 import cn.edu.ecnu.dao.StudentMapper;
 import cn.edu.ecnu.dao.TeacherMapper;
 import cn.edu.ecnu.dao.UserMapper;
-import cn.edu.ecnu.domain.Student;
-import cn.edu.ecnu.domain.Teacher;
-import cn.edu.ecnu.domain.User;
-import cn.edu.ecnu.domain.UserExample;
+import cn.edu.ecnu.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -26,6 +24,9 @@ public class UserService {
 
     @Autowired
     private StudentMapper studentMapper;
+
+    @Autowired
+    JudgeTeacherProjectMapper judgeTeacherProjectMapper;
 
     @Cacheable
     public List<User> getAllUsers() {
@@ -48,5 +49,9 @@ public class UserService {
         teacher.setTid(user.getUid());
         teacherMapper.insertSelective(teacher);
         userMapper.insertSelective(user);
+    }
+
+    public void insertJudgeTeacherProject(JudgeTeacherProject judge) {
+        insertJudgeTeacherProject(judge);
     }
 }
