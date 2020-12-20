@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.service.AttachService;
+import cn.edu.ecnu.service.IAttachService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.io.FileNotFoundException;
 public class AttachController {
 
     @Autowired
-    private AttachService attachService;
+    private IAttachService attachService;
 
     @ApiOperation("文件上传")
     @ResponseBody

@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Project;
+import cn.edu.ecnu.service.IProjectService;
 import cn.edu.ecnu.service.ProjectService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -16,7 +17,7 @@ import java.util.UUID;
 public class ProjectController {
 
     @Autowired
-    private ProjectService projectService;
+    private IProjectService projectService;
 
     @ApiOperation("根据pid查询项目信息")
     @GetMapping("/{pid}")

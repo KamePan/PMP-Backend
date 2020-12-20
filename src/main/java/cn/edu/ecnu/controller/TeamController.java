@@ -2,6 +2,7 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Team;
 import cn.edu.ecnu.domain.TeamStudent;
+import cn.edu.ecnu.service.ITeamService;
 import cn.edu.ecnu.service.TeamService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class TeamController {
 
     @Autowired
-    private TeamService teamService;
+    private ITeamService teamService;
 
     @ApiOperation("通过teamid查询队伍")
     @ResponseBody

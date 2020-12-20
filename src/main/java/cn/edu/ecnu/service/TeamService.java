@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 // @Cacheable：配置方法的缓存参数，可自定义缓存的key以及value。
 
 @CacheConfig(cacheNames = "Team", keyGenerator = "keyGenerator")
-@Service
+//@Service
 public class TeamService {
 
     @Autowired

@@ -2,7 +2,7 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.JudgeTeacherProject;
 import cn.edu.ecnu.domain.User;
-import cn.edu.ecnu.service.UserService;
+import cn.edu.ecnu.service.IUserService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,7 +22,7 @@ public class AdminController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService userService;
+    public IUserService userService;
 
     @ApiOperation(value = "查找所有用户")
     @ResponseBody

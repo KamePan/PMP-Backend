@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @CacheConfig(cacheNames = "Student", keyGenerator = "keyGenerator")
-@Service
+//@Service
 public class StudentService {
 
     @Autowired

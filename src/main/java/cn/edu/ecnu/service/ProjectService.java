@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @CacheConfig(cacheNames = "Project", keyGenerator = "keyGenerator")
-@Service
+//@Service
 public class ProjectService {
 
     @Autowired

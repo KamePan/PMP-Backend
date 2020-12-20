@@ -17,4 +17,18 @@
 
     <dubbo:reference interface="cn.edu.ecnu.service.IAdviceService"
                      id="adviceService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IAttachService"
+                     id="attachService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IMessageService"
+                     id="messageService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IProjectService"
+                     id="projectService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.ITeacherService"
+                     id="teacherService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IStudentService"
+                     id="studentService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.ITeamService"
+                     id="teamService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IUserService"
+                     id="userService" retries="0" timeout="6000"/>
 </beans>

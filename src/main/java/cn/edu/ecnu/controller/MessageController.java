@@ -2,6 +2,7 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Message;
 import cn.edu.ecnu.netty.ChannelPool;
+import cn.edu.ecnu.service.IMessageService;
 import cn.edu.ecnu.service.MessageService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class MessageController {
 
     @Autowired
-    private MessageService messageService;
+    private IMessageService messageService;
 
     @ApiOperation("向接收队列的每个id发送一条内容为content的消息")
     @ResponseBody

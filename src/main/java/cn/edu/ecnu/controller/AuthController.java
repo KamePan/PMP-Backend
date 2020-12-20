@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.User;
+import cn.edu.ecnu.service.IUserService;
 import cn.edu.ecnu.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;

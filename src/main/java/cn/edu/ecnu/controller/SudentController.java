@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Student;
+import cn.edu.ecnu.service.IStudentService;
 import cn.edu.ecnu.service.StudentService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class SudentController {
 
     @Autowired
-    private StudentService studentService;
+    private IStudentService studentService;
 
     @ApiOperation("通过用户id查询学生信息")
     @GetMapping("/{id}")

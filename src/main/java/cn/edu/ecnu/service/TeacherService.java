@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @CacheConfig(cacheNames = "Teacher")
-@Service
+//@Service
 public class TeacherService {
 
     @Autowired
