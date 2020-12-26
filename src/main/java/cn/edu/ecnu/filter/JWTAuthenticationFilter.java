@@ -88,6 +88,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 返回成功 token
         response.setHeader("token", JwtUtil.tokenPrefix + token);
         response.setHeader("role", role);
+        response.setHeader("uid", jwtUser.getId());
     }
 
     /*验证失败后调用方法*/

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Api(tags = "组队信息控制器")
@@ -49,6 +50,15 @@ public class TeamController {
         JSONObject object = new JSONObject();
         teamService.inviteMember(teamStudent);
         object.put("invite", teamStudent);
+        return object;
+    }
+
+    @ApiOperation("根据 sid 获取参与的小组")
+    @GetMapping("/stu/{sid}")
+    public JSONObject findTeamsBySid(@PathVariable String sid) {
+        JSONObject object = new JSONObject();
+        List<Team> teams = teamService.findTeamsBySid(sid);
+        object.put("teams", teams);
         return object;
     }
 }

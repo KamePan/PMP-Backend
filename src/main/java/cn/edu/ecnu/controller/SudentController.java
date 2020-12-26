@@ -2,7 +2,6 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Student;
 import cn.edu.ecnu.service.IStudentService;
-import cn.edu.ecnu.service.StudentService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

@@ -5,7 +5,6 @@ import cn.edu.ecnu.domain.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
 
 @CacheConfig(cacheNames = "Student", keyGenerator = "keyGenerator")
 //@Service

@@ -14,4 +14,6 @@ public interface IUserService {
     public User registerUser(User user);
 
     public List<User> getAllUsers();
+
+    User findUserByUsername();
 }

@@ -49,8 +49,8 @@ public class AdminController {
     @PostMapping("createTeacher")
     public JSONObject createUserForTeacher(@RequestBody User user) {
         JSONObject object = new JSONObject();
-        user.setUid(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setUid("U" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole("ROLE_TEACHER");
         userService.insertUserForTeacher(user);
         object.put("user", user);

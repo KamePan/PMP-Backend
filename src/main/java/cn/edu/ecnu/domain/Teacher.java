@@ -1,5 +1,6 @@
 package cn.edu.ecnu.domain;
 
+import io.swagger.annotations.ApiModel;
 import lombok.*;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@ApiModel(description = "")
 public class Teacher implements Serializable {
 
     private String tid;
@@ -23,6 +25,8 @@ public class Teacher implements Serializable {
     private String jobtitle;
 
     private String description;
+
+    private String username;
 
     private List<Project> projectsToJudge;
 

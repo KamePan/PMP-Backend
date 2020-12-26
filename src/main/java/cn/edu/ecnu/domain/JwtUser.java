@@ -39,6 +39,10 @@ public class JwtUser implements UserDetails {
         return username;
     }
 
+    public String getId() {
+        return id;
+    }
+
     /*返回账号是否未过期*/
     @Override
     public boolean isAccountNonExpired() {
