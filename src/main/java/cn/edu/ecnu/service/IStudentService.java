@@ -4,5 +4,7 @@ import cn.edu.ecnu.domain.Student;
 
 public interface IStudentService {
 
-    public Student findStudentById(String id);
+    Student findStudentById(String id);
+
+    Student findUserByUsername(String username);
 }

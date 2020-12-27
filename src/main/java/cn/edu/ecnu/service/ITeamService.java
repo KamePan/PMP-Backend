@@ -7,11 +7,15 @@ import java.util.List;
 
 public interface ITeamService {
 
-    public Team findTeamById(String tid);
+    Team findTeamById(String tid);
 
-    public void insertTeam(Team team, String uid);
-
-    public void inviteMember(TeamStudent teamStudent);
+    Team insertTeam(Team team, String uid);
 
     List<Team> findTeamsBySid(String sid);
+
+    void deleteStudentFromTeam(TeamStudent teamStudent);
+
+    void inviteMember(TeamStudent teamStudent);
+
+    Team updateTeamName(String teamid, String teamname);
 }

@@ -1,6 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Project;
+import cn.edu.ecnu.domain.Teacher;
 import cn.edu.ecnu.service.IProjectService;
 import cn.edu.ecnu.service.ProjectService;
 import com.alibaba.fastjson.JSON;
@@ -25,22 +26,19 @@ public class ProjectController {
     @GetMapping("/{pid}")
     @ResponseBody
     public JSONObject findProjectById(@PathVariable String pid) {
-        JSONObject object = new JSONObject();
         Project project = projectService.findProjectById(pid);
-        object.put("pro", project);
-        return object;
+        return (JSONObject) JSON.toJSON(project);
     }
 
     @ApiOperation("创建新项目")
     @PostMapping
     @ResponseBody
     public JSONObject createProject(@RequestBody Project project) {
-        JSONObject object = new JSONObject();
         String pid = "P" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         project.setPid(pid);
-        projectService.insertProject(project);
-        object.put("project", project);
-        return object;
+        project.setStage(1);
+        project = projectService.insertProject(project);
+        return (JSONObject) JSON.toJSON(project);
     }
 
     @ApiOperation("通过 sid 查询返回学生有的项目")

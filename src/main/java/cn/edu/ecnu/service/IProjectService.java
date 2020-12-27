@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IProjectService {
 
-    public void insertProject(Project project);
+    Project insertProject(Project project);
 
-    public Project findProjectById(String pid);
+    Project findProjectById(String pid);
 
     List<Project> findProjectsBySid(String sid);
 }

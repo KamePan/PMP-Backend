@@ -1,6 +1,7 @@
 package cn.edu.ecnu.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Accessors(chain = true)
 public class TeamStudent implements Serializable {
 
     private String teamid;

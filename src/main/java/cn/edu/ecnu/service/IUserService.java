@@ -15,5 +15,5 @@ public interface IUserService {
 
     public List<User> getAllUsers();
 
-    User findUserByUsername();
+    User findUserByUsername(String username);
 }

@@ -34,7 +34,11 @@ public class Project implements Serializable {
 
     private String teamid;
 
+    private Team team;
+
     private List<Advice> adviceList;
+
+    private List<Attachment> attachments;
 
     private static final long serialVersionUID = 1L;
 

@@ -2,6 +2,7 @@ package cn.edu.ecnu.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Accessors(chain = true)
 @ApiModel(description = "")
 public class Advice implements Serializable {
 

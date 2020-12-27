@@ -2,6 +2,7 @@ package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Teacher;
 import cn.edu.ecnu.service.ITeacherService;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,10 +21,8 @@ public class TeacherController {
     @GetMapping("/{tid}")
     @ResponseBody
     public JSONObject findTeacherById(@PathVariable String tid) {
-        JSONObject object = new JSONObject();
         Teacher teacher = teacherService.findTeacherById(tid);
-        object.put("teacher", teacher);
-        return object;
+        return (JSONObject) JSON.toJSON(teacher);
     }
 
     @ApiOperation("根据 tid 修改教师信息")
