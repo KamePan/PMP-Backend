@@ -7,4 +7,6 @@ public interface IStudentService {
     Student findStudentById(String id);
 
     Student findUserByUsername(String username);
+
+    void updateStudent(Student student);
 }

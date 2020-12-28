@@ -24,4 +24,12 @@ public class StudentController {
         Student stu = studentService.findStudentById(id);
         return (JSONObject) JSON.toJSON(stu);
     }
+
+    @ApiOperation("修改学生信息")
+    @PutMapping
+    public JSONObject updateStudent(@RequestBody Student student) {
+        studentService.updateStudent(student);
+        return (JSONObject) JSON.toJSON(student);
+    }
+
 }
