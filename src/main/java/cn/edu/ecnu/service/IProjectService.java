@@ -11,4 +11,6 @@ public interface IProjectService {
     Project findProjectById(String pid);
 
     List<Project> findProjectsBySid(String sid);
+
+    void updateProject(Project project);
 }

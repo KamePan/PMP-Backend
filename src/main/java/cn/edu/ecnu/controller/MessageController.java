@@ -3,7 +3,6 @@ package cn.edu.ecnu.controller;
 import cn.edu.ecnu.domain.Message;
 import cn.edu.ecnu.netty.ChannelPool;
 import cn.edu.ecnu.service.IMessageService;
-import cn.edu.ecnu.service.MessageService;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

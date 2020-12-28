@@ -1,7 +1,6 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Attachment;
-import cn.edu.ecnu.service.AttachService;
 import cn.edu.ecnu.service.IAttachService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -29,8 +28,7 @@ public class AttachController {
     @ResponseBody
     @PostMapping("/{pid}")
     public JSONObject upload(@PathVariable("pid")String pid,
-                             @RequestParam("file")MultipartFile file,
-                             HttpServletRequest request) throws FileNotFoundException {
+                             @RequestParam("file")MultipartFile file) throws FileNotFoundException {
         String path = ResourceUtils.getURL("classpath:").getPath();
         System.out.println(path);
         path = path.substring(1).replace("/", "\\");
@@ -38,8 +36,35 @@ public class AttachController {
         System.out.println(path);
         Attachment attachment = insertAttachment(pid, file, path);
         System.out.println("文件上传到了路径 "+ attachment.getPath() + " 下");
-        return (JSONObject)JSON.toJSON(attachment);
+        return (JSONObject) JSON.toJSON(attachment);
     }
+
+    @ApiOperation("文件删除")
+    @ResponseBody
+    @DeleteMapping("/{aid}")
+    public JSONObject deleteAttachment(@PathVariable String aid) throws FileNotFoundException {
+
+        Attachment attachment = attachService.findAttachmentByAid(aid);
+        deleteAttachmentFromDir(attachment.getPath());
+        attachService.deleteAttachmentByAid(aid);
+        return (JSONObject) JSON.toJSON(attachment);
+    }
+
+
+    private void deleteAttachmentFromDir(String path) {
+        File fileInTarget = new File(path);
+        if (fileInTarget.exists() == true) {
+            System.out.println("文件存在，可执行删除操作");
+            Boolean flag = false;
+            flag = fileInTarget.delete();
+            if (flag) {
+                System.out.println("成功删除文件" + fileInTarget.getName());
+            } else {
+                System.out.println("文件删除失败");
+            }
+        }
+    }
+
 
     private Attachment insertAttachment(String pid, MultipartFile file, String path) {
 
@@ -58,5 +83,4 @@ public class AttachController {
         attachService.insertAttachment(attachment);
         return attachment;
     }
-
 }

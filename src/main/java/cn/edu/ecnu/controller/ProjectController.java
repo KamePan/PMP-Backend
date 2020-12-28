@@ -1,9 +1,7 @@
 package cn.edu.ecnu.controller;
 
 import cn.edu.ecnu.domain.Project;
-import cn.edu.ecnu.domain.Teacher;
 import cn.edu.ecnu.service.IProjectService;
-import cn.edu.ecnu.service.ProjectService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
@@ -49,6 +47,13 @@ public class ProjectController {
         List<Project> projects = projectService.findProjectsBySid(sid);
         object.put("projects", projects);
         return object;
+    }
+
+    @ApiOperation("根据 pid 修改描述")
+    @PutMapping
+    public JSONObject updateProjectByPid(@RequestBody Project project) {
+        projectService.updateProject(project);
+        return (JSONObject) JSON.toJSON(project);
     }
 
 }
