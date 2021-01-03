@@ -31,4 +31,6 @@
                      id="teamService" retries="0" timeout="6000"/>
     <dubbo:reference interface="cn.edu.ecnu.service.IUserService"
                      id="userService" retries="0" timeout="6000"/>
+    <dubbo:reference interface="cn.edu.ecnu.service.IJudgeService"
+                     id="judgeService" retries="0" timeout="6000"/>
 </beans>

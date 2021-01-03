@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -98,5 +99,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             AuthenticationException failed)
             throws IOException, ServletException {
         response.getWriter().write("authentication failed, reason: " + failed.getMessage());
+        response.setStatus(401);
+        throw new RuntimeException("authentication failed, reason: " + failed.getMessage());
     }
 }

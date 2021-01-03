@@ -1,8 +1,10 @@
 package cn.edu.ecnu.controller;
 
-import cn.edu.ecnu.domain.JudgeTeacherProject;
+import cn.edu.ecnu.domain.Project;
 import cn.edu.ecnu.domain.User;
+import cn.edu.ecnu.service.IProjectService;
 import cn.edu.ecnu.service.IUserService;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +26,8 @@ public class AdminController {
     @Autowired
     public IUserService userService;
 
+    private final String DEFAULT_PASSWORD = "123";
+
     @ApiOperation(value = "查找所有用户")
     @ResponseBody
     @GetMapping
@@ -34,27 +38,15 @@ public class AdminController {
         return object;
     }
 
-    @ApiOperation(value = "分配项目审查老师")
-    @ResponseBody
-    @PostMapping("/assignTeacher")
-    public JSONObject assignJudgeForProject(@RequestBody JudgeTeacherProject judge) {
-        JSONObject object = new JSONObject();
-        userService.insertJudgeTeacherProject(judge);
-        object.put("judge",judge);
-        return object;
-    }
-
     @ApiOperation("创建权限为 ROLE_TEACHER 的用户")
     @ResponseBody
-    @PostMapping("createTeacher")
+    @PostMapping
     public JSONObject createUserForTeacher(@RequestBody User user) {
-        JSONObject object = new JSONObject();
         user.setUid("U" + UUID.randomUUID().toString().substring(0, 8).toUpperCase());
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
         user.setRole("ROLE_TEACHER");
         userService.insertUserForTeacher(user);
-        object.put("user", user);
-        return object;
+        return (JSONObject) JSON.toJSON(user);
     }
 
 }

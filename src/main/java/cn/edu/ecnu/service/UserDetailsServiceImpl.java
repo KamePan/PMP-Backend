@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -21,7 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
         criteria.andUsernameEqualTo(s);
-        User user = userMapper.selectByExample(example).get(0);
+        List<User> users = userMapper.selectByExample(example);
+        User user = null;
+        if (users.size() > 0) {
+            user = users.get(0);
+        }
         return new JwtUser(user);
     }
 }

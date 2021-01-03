@@ -28,6 +28,7 @@ public class AdviceController {
         String aid = "A" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         advice.setAid(aid).setPid(pid);
         Date date = new Date();
+        System.out.println(date.getTime());
         advice.setAdvicetime(date);
         adviceService.insertAdvice(advice);
         return (JSONObject) JSON.toJSON(advice);

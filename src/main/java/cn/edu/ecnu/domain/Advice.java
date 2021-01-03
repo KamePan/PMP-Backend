@@ -13,8 +13,9 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Accessors(chain = true)
-@ApiModel(description = "")
+@ApiModel(description = "建议信息")
 public class Advice implements Serializable {
+
 
     private String aid;
 

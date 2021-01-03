@@ -31,10 +31,8 @@ public class TeamController {
     @ResponseBody
     @GetMapping("/{teamid}")
     public JSONObject findTeamById(@PathVariable String teamid) {
-        JSONObject object = new JSONObject();
         Team team = teamService.findTeamById(teamid);
-        object.put("team", team);
-        return object;
+        return (JSONObject) JSON.toJSON(team);
     }
 
     @ApiOperation("创建队伍")
@@ -46,6 +44,14 @@ public class TeamController {
         Team savedTeam = teamService.insertTeam(team, uid);
         System.out.println(savedTeam);
         return (JSONObject) JSON.toJSON(savedTeam);
+    }
+
+    @ApiOperation("解散队伍")
+    @ResponseBody
+    @DeleteMapping("/{teamid}")
+    public String deleteTeam(@PathVariable String teamid) {
+        teamService.deleteTeamByTeamid(teamid);
+        return "成功解散队伍 " + teamid;
     }
 
     @ApiOperation("根据 username 邀请成员加入项目")

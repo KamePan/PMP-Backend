@@ -2,6 +2,7 @@ package cn.edu.ecnu.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Accessors(chain = true)
 @ApiModel(description = "")
 public class Project implements Serializable {
 
@@ -39,6 +41,8 @@ public class Project implements Serializable {
     private List<Advice> adviceList;
 
     private List<Attachment> attachments;
+
+    private List<Judge> judges;
 
     private static final long serialVersionUID = 1L;
 

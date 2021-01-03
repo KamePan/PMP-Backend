@@ -18,4 +18,6 @@ public interface ITeamService {
     void inviteMember(TeamStudent teamStudent);
 
     Team updateTeamName(String teamid, String teamname);
+
+    void deleteTeamByTeamid(String teamid);
 }

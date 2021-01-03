@@ -13,4 +13,12 @@ public interface IProjectService {
     List<Project> findProjectsBySid(String sid);
 
     void updateProject(Project project);
+
+    List<Project> findProjectsWithStageEqualsTwo();
+
+    List<Project> findProjectsNeedsType();
+
+    List<Project> fuzzyQueryForProjects(Project project);
+
+    List<Project> findAllProjects();
 }
